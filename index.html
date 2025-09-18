@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>ขอเป็นแฟน</title>
+  <style>
+    :root{
+      --bg:#fff6fb; --card:#fff; --accent:#ff6b9a; --muted:#6b6b6b;
+      --shadow: 0 6px 15px rgba(0,0,0,0.08);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:'Segoe UI','Noto Sans Thai',sans-serif;
+      background:linear-gradient(135deg,#fff6fb,#fff0f6);
+      display:flex;align-items:center;justify-content:center;
+      padding:10px;color:#222;
+    }
+    .frame{width:100%; max-width:420px;}
+    .card{background:var(--card); border-radius:14px; padding:16px; box-shadow:var(--shadow);}
+    header{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+    .logo{width:48px;height:48px;border-radius:10px; background:linear-gradient(135deg,var(--accent),#ffd1e6); display:flex; align-items:center; justify-content:center; font-weight:700; color:white; font-size:22px}
+    h1{font-size:20px;margin:0 0 4px 0}
+    p.lead{margin:0;color:var(--muted); font-size:13px}
+
+    .center{display:grid; place-items:center; padding:16px 6px}
+    .big-heart{font-size:60px; margin-bottom:10px}
+    .love-card{text-align:center}
+    .love-card h2{font-size:18px;margin:6px 0}
+    .love-card p{color:var(--muted); line-height:1.4; font-size:14px}
+
+    .row{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:14px}
+    .btn{flex:1; min-width:100px; padding:10px 14px; border-radius:8px; font-weight:600; border:none; cursor:pointer; transition:all .3s ease; font-size:14px}
+    .btn-primary{background:var(--accent); color:white}
+    .btn-ghost{background:transparent; border:2px solid rgba(0,0,0,0.1)}
+
+    .page{display:none}
+    .page.active{display:block}
+
+    .play-btn{position:relative}
+    .spin{animation:spin 0.5s linear}
+    @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+
+    footer{text-align:center; margin-top:8px; color:var(--muted); font-size:11px}
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="card">
+      <header>
+        <div class="logo">❤</div>
+        <div>
+          <h1>มีไรมาบอก</h1>
+          <p class="lead">กดดูก่อน</p>
+        </div>
+      </header>
+
+      <!-- Page 1: Feelings -->
+      <main id="page-feel" class="page active">
+        <div class="center">
+          <div class="big-heart">💖</div>
+          <div class="love-card">
+            <h2>อยากบอกเธอว่า</h2>
+            <p>
+              เค้าดีใจมากนะที่ได้คุยกับเธอ เค้ามีความสุขมากๆที่ได้อยู่กับเธอ
+              เค้าไม่อยากให้เธอหายไปไหน❤
+            </p>
+            <div class="row">
+              <button id="btn-next1" class="btn btn-primary">ไปหน้าถัดไป ➜</button>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Page 2: Play button (run away) -->
+      <main id="page-play1" class="page">
+        <div class="center">
+          <button id="btn-play1" class="btn btn-ghost play-btn">กดฉันสิ 😏</button>
+        </div>
+      </main>
+
+      <!-- Page 3: Play button (spin) -->
+      <main id="page-play2" class="page">
+        <div class="center">
+          <button id="btn-play2" class="btn btn-primary play-btn">ลองกดดู 😆</button>
+        </div>
+      </main>
+
+      <!-- Page 4: Ask -->
+      <main id="page-ask" class="page">
+        <div class="center">
+          <div class="love-card">
+            <h2>เป็นเเฟนกับเค้านะ🥰</h2>
+            <div class="row">
+              <button id="btn-yes" class="btn btn-primary">เป็น 💕</button>
+              <button id="btn-no" class="btn btn-ghost">ไม่เป็น 🙈</button>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Page 5: Accepted -->
+      <main id="page-yes" class="page">
+        <div class="center">
+          <div class="love-card">
+            <h2>เย้ๆ รักนะค้าบ 💞</h2>
+            <p>เค้ารักเธอนะ</p>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    function showPage(id){
+      document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'))
+      document.getElementById(id).classList.add('active')
+    }
+
+    document.getElementById('btn-next1').addEventListener('click',()=>{
+      showPage('page-play1')
+    })
+
+    // Page 2 button run away
+    const play1 = document.getElementById('btn-play1')
+    play1.addEventListener('mouseover',()=>{
+      play1.style.position = 'absolute'
+      play1.style.top = Math.random()*200 + 'px'
+      play1.style.left = Math.random()*200 + 'px'
+    })
+    play1.addEventListener('click',()=>{
+      showPage('page-play2')
+    })
+
+    // Page 3 button spin
+    const play2 = document.getElementById('btn-play2')
+    play2.addEventListener('click',()=>{
+      play2.classList.add('spin')
+      setTimeout(()=>{
+        play2.classList.remove('spin')
+        showPage('page-ask')
+      },500)
+    })
+
+    document.getElementById('btn-yes').addEventListener('click',()=>{
+      showPage('page-yes')
+    })
+
+    let yesBtn = document.getElementById('btn-yes')
+    let noBtn = document.getElementById('btn-no')
+
+    noBtn.addEventListener('click',()=>{
+      let yesSize = parseFloat(window.getComputedStyle(yesBtn).fontSize)
+      let noSize = parseFloat(window.getComputedStyle(noBtn).fontSize)
+      yesBtn.style.fontSize = (yesSize + 2) + 'px'
+      noBtn.style.fontSize = Math.max(noSize - 2, 8) + 'px'
+    })
+  </script>
+</body>
+</html>
