@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>เค้าตั้งใจทำมากๆเลยนะ</title>
+  <title>ขอเป็นแฟน</title>
   <style>
     :root{
       --bg:#fff6fb; --card:#fff; --accent:#ff6b9a; --muted:#6b6b6b;
@@ -56,8 +56,21 @@
         </div>
       </header>
 
+      <!-- Page 0: Intro -->
+      <main id="page-intro" class="page active">
+        <div class="center">
+          <div class="love-card">
+            <h2>เฮ้...มีเรื่องจะบอก 😊</h2>
+            <p>ก่อนอื่นกดเริ่มก่อนนะ จะได้ไปฟังความในใจเค้า</p>
+            <div class="row">
+              <button id="btn-start" class="btn btn-primary">เริ่มเลย ➜</button>
+            </div>
+          </div>
+        </div>
+      </main>
+
       <!-- Page 1: Feelings -->
-      <main id="page-feel" class="page active">
+      <main id="page-feel" class="page">
         <div class="center">
           <div class="big-heart">💖</div>
           <div class="love-card">
@@ -118,6 +131,10 @@
       document.getElementById(id).classList.add('active')
     }
 
+    document.getElementById('btn-start').addEventListener('click',()=>{
+      showPage('page-feel')
+    })
+
     document.getElementById('btn-next1').addEventListener('click',()=>{
       showPage('page-play1')
     })
@@ -158,5 +175,4 @@
     })
   </script>
 </body>
-
 </html>
